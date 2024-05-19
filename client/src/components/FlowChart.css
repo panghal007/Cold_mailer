@@ -1,0 +1,39 @@
+.dndflow {
+  display: flex;
+}
+
+.reactflow-wrapper {
+  flex-grow: 1;
+  position: relative;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 200px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-right: 1px solid #ddd;
+}
+
+.dndnode {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+  cursor: grab;
+}
+
+.dndnode:active {
+  cursor: grabbing;
+}
+
+.context-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
