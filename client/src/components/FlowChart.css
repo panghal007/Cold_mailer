@@ -18,9 +18,9 @@ body {
   height: 100%;
   border: 1px solid #ddd;
   border-radius: 8px;
-  margin: 10px;
   overflow: hidden;
   position: relative;
+  
 }
 
 .reactflow-wrapper .react-flow {
@@ -40,7 +40,17 @@ body {
   flex-direction: column;
   align-items: flex-start;
 }
+.logout-button{
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 
+}
 .description {
   font-size: 14px;
   margin-bottom: 40px;
@@ -55,7 +65,7 @@ body {
   color: white;
   border-radius: 4px;
   cursor: grab;
-  transition: background-color 0.2s ease;
+  transition : background-color 0.2s ease;
 }
 
 .dndnode:hover {
