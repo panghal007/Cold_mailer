@@ -36,6 +36,7 @@ const FlowChart = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [emailStatus, setEmailStatus] = useState([]);
+  const [currentEmailId, setCurrentEmailId] = useState(null);
   const [menu, setMenu] = useState(null);
   const reactFlowWrapper = useRef(null);
   const navigate = useNavigate();
@@ -122,15 +123,16 @@ const FlowChart = () => {
 
   const saveFlowchart = async () => {
     if (!reactFlowInstance) return;
-
+  
     try {
       setSaving(true);
       const flowchartData = reactFlowInstance.toObject();
-
+      let currentEmailId = null;
+  
       // Schedule emails based on the flowchart data
       for (const node of flowchartData.nodes) {
         if (node.type === 'waitDelayNode') {
-          await fetch('http://localhost:5000/api/schedule', {
+          const response = await fetch('http://localhost:5000/api/schedule', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -142,9 +144,14 @@ const FlowChart = () => {
               delay: node.data.delay || 0, // Default to 0 if no delay
             }),
           });
+          const data = await response.json();
+          currentEmailId = data.emailId;  // assuming the response contains the scheduled email's ID
+          console.log(currentEmailId);
         }
       }
-
+  
+      // Store the current email ID in local state or context
+      setCurrentEmailId(currentEmailId);
       alert('Flowchart saved and emails scheduled successfully!');
     } catch (error) {
       console.error('Error saving flowchart:', error);
@@ -213,6 +220,18 @@ const FlowChart = () => {
             draggable
           >
             Lead Source Node
+          </div>
+          <div className="email-status">
+            <h3>Email Status</h3>
+            <ul>
+              {emailStatus
+                .filter((email) => email._id === currentEmailId)  // assuming the unique identifier is _id
+                .map((email) => (
+                  <li key={email._id}>
+                    <strong>{email.subject}</strong> - {email.status}
+                  </li>
+                ))}
+            </ul>
           </div>
           <button className="logout-button" onClick={handleLogout}>
             Logout

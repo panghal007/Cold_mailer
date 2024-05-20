@@ -38,9 +38,12 @@ body {
   display: flex;
   border-radius: 8px;
   flex-direction: column;
+  justify-content: space-between; /* Add this line */
   align-items: flex-start;
 }
-.logout-button{
+
+.logout-button {
+  align-self:center; /* Change this from 'last baseline' to 'flex-end' */
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #ff4d4f;
@@ -49,7 +52,6 @@ body {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-
 }
 .description {
   font-size: 14px;

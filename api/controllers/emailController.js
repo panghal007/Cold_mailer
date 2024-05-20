@@ -60,7 +60,7 @@ exports.scheduleEmail = async (req, res) => {
 
   await agenda.schedule(scheduledAt, 'send email', { emailId: email._id });
 
-  res.status(200).json({ message: 'Email scheduled successfully' });
+  res.status(200).json({ message: 'Email scheduled successfully' , emailId: email._id});
 };
 
 exports.getEmailStatus = async (req, res) => {
