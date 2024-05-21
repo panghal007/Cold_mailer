@@ -60,10 +60,14 @@ body {
 }
 
 .dndnode {
-  display: inline-block;
+  
+  width: 150px;
+  height: 50px;
   padding: 10px 15px;
-  margin-bottom: 10px;
-  background-color: #1890ff;
+  text-align: center;
+  
+  
+  background-color: #8d97a1;
   color: white;
   border-radius: 4px;
   cursor: grab;

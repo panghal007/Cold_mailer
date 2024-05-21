@@ -1,14 +1,25 @@
 import React from 'react';
 import { Handle } from 'reactflow';
 
-const LeadSourceNode = ({ data }) => {
-  return (
-    <div style={{ padding: 10, border: '1px solid #ddd', borderRadius: 5 }}>
-      <Handle type="target" position="top" style={{ background: '#555' }} />
-      <strong>{data.label}</strong>
-      <Handle type="source" position="bottom" style={{ background: '#555' }} />
-    </div>
-  );
+const LeadSourceNode = ({ data }) => (
+  <div style={styles.container}>
+    <strong>{data.label}</strong>
+    <Handle type="source" position="bottom" style={styles.handle} />
+  </div>
+);
+
+const styles = {
+  container: {
+    padding: 10,
+    border: '1px solid #ddd',
+    borderRadius: 5,
+    backgroundColor: '#f9f9f9',
+    textAlign: 'center',
+    fontFamily: 'Arial, sans-serif',
+  },
+  handle: {
+    background: '#555',
+  },
 };
 
 export default LeadSourceNode;

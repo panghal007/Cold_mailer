@@ -123,12 +123,12 @@ const FlowChart = () => {
 
   const saveFlowchart = async () => {
     if (!reactFlowInstance) return;
-  
+
     try {
       setSaving(true);
       const flowchartData = reactFlowInstance.toObject();
       let currentEmailId = null;
-  
+
       // Schedule emails based on the flowchart data
       for (const node of flowchartData.nodes) {
         if (node.type === 'waitDelayNode') {
@@ -145,14 +145,17 @@ const FlowChart = () => {
             }),
           });
           const data = await response.json();
-          currentEmailId = data.emailId;  // assuming the response contains the scheduled email's ID
+          currentEmailId = data.emailId; // assuming the response contains the scheduled email's ID
           console.log(currentEmailId);
         }
       }
-  
+
       // Store the current email ID in local state or context
       setCurrentEmailId(currentEmailId);
       alert('Flowchart saved and emails scheduled successfully!');
+      
+      // Fetch email status after saving the flowchart
+      fetchEmailStatus();
     } catch (error) {
       console.error('Error saving flowchart:', error);
     } finally {
@@ -199,7 +202,7 @@ const FlowChart = () => {
           </button>
         </div>
         <aside className="sidebar">
-          <div className="description">Drag these nodes to the pane on the right:</div>
+          <div className="description">Drag these nodes to the panel on the right:</div>
           <div
             className="dndnode"
             onDragStart={(event) => event.dataTransfer.setData('application/reactflow', 'coldEmailNode')}
@@ -225,7 +228,7 @@ const FlowChart = () => {
             <h3>Email Status</h3>
             <ul>
               {emailStatus
-                .filter((email) => email._id === currentEmailId)  // assuming the unique identifier is _id
+                .filter((email) => email._id === currentEmailId) // assuming the unique identifier is _id
                 .map((email) => (
                   <li key={email._id}>
                     <strong>{email.subject}</strong> - {email.status}
